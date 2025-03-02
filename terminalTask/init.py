@@ -1,15 +1,16 @@
 from userdata import *
-
 import time
 import os
 
+# bold and italic varibles
 boldstart = '\033[1m'
 boldend = '\033[0m'
 italicstart = '\x1B[3m'
 italicend = '\x1B[23m'
+# mail contents
 mail_1 = {"sender": "teto", "receiver": "rin", "message": f"RUN BEFORE {italicstart}SHE{italicend} CATCHES YOU"}
 
-
+# login function
 def login():
     global logged_user
     global logged_pass
@@ -33,19 +34,23 @@ def login():
     print("No Username Found.")
     return login()
 
+# greet function
 def main():
     print(f"Hello, {boldstart}{logged_user.title()}{boldend}!")
     print("Enter a command to continue.")
     commands()
 
+# all the commands
 def commands():
     user_input = input("> ")
+    # i got bored here
     if user_input == "passwordget":
         print("Your password: " + logged_pass)
         return commands()
     elif user_input == "exit":
         user_input = input("Are you sure? (Y/N) ").upper()
         if user_input == "Y":
+            # clears the system
             os.system('cls||clear')
             os._exit(0)
         elif user_input == "N":
@@ -54,6 +59,7 @@ def commands():
             print("Command not found.")
             commands()
     elif user_input == "help":
+        # more like help me, am i right?
         print(f"This is the {boldstart}help{boldend} command.")
         print("exit: Exits MikOS.")
         print("help: This command.")
