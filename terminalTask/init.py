@@ -40,6 +40,8 @@ def main():
     print("Enter a command to continue.")
     commands()
 
+# calc command goes here
+
 # all the commands
 def commands():
     user_input = input("> ")
