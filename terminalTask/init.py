@@ -46,6 +46,7 @@ def commands():
     # i got bored here
     if user_input == "passwordget":
         print("Your password: " + logged_pass)
+        # does this matter?
         return commands()
     elif user_input == "exit":
         user_input = input("Are you sure? (Y/N) ").upper()
