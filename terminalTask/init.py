@@ -40,7 +40,46 @@ def main():
     print("Enter a command to continue.")
     commands()
 
-# calc command goes here
+def calc():
+    print("Welcom to the Calc App!")
+    print("Select an operation:")
+    print("1. Addition")
+    print("2. Subtraction")
+    print("3. Multiplcation")
+    print("4. Division")
+    calc_input = input("")
+    if calc_input == "1":
+        while True:
+            # some try-excepts so you wont enter a string
+            try:
+                num_1 = input(int("Enter your first number: "))
+                break
+            except ValueError:
+                print("Please enter a number.")
+            try:
+                num_2 = input(int("Enter your second number: "))
+                break
+            except ValurError:
+                print("Please enter a number.")
+            ans = num_1 + num_2
+            print(f"The answer is {ans}.")
+            print("Sending you back to the terminal.")
+            commands()
+                
+    elif calc_input == "2":
+        print("so i havent coded that yet here's the terminal")
+        commands()
+    elif calc_input == "3":
+        print("so i havent coded that yet here's the terminal")
+        commands()
+    elif calc_input == "4":
+        print("so i havent coded that yet here's the terminal")
+        commands()
+    else:
+        print("Command not found.")
+        time.sleep(.4)
+        print("Calculator exited.")
+        commands()
 
 # all the commands
 def commands():
@@ -70,6 +109,7 @@ def commands():
         print("dir: Shows the files in the directory.")
         print("open: Opens a file or folder. To open a file not in the current folder, use a forward slash. (eg: Folder/file.txt)")
         print("logout: Log the user out.")
+        print("calc: Opens the Calc App.")
         commands()
     elif user_input == "dir":
         print("Directory:")
@@ -131,6 +171,8 @@ def commands():
     elif user_input == "logout":
         os.system('cls||clear')
         login()
+    elif user_input == "calc":
+        calc()
     else:
         print("Command not found.")
         commands()
