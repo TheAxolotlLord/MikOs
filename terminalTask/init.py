@@ -90,6 +90,7 @@ def commands():
         print(f"You must have the role {italicstart}SYS_OP{italicend} to do that.")
         commands()
     elif user_input == "open SentMail":
+        # make function called openFolder(input)
         if logged_user == "teto":
             print("There is 1 item(s) in this folder:")
             print("untitled1.mail")
