@@ -50,35 +50,96 @@ def calc():
     calc_input = input("")
     if calc_input == "1":
         while True:
-            # some try-excepts so you wont enter a string
             try:
-                num_1 = input(int("Enter your first number: "))
+                num_1 = int(input("Enter your first number: "))
                 break
             except ValueError:
-                print("Please enter a number.")
-            try:
-                num_2 = input(int("Enter your second number: "))
-                break
-            except ValurError:
-                print("Please enter a number.")
-            ans = num_1 + num_2
-            print(f"The answer is {ans}.")
-            print("Sending you back to the terminal.")
-            commands()
+                print("Please enter a valid number.")
                 
+        while True:
+            try:
+                num_2 = int(input("Enter your second number: "))
+                break
+            except ValueError:
+                print("Please enter a valid number.")
+                
+        ans = num_1 + num_2
+        print(f"The answer is {ans}.")
+        print("Sending you back to the terminal.")
+        commands()
     elif calc_input == "2":
-        print("so i havent coded that yet here's the terminal")
+        while True:
+            try:
+                num_1 = int(input("Enter your first number: "))
+                break
+            except ValueError:
+                print("Please enter a valid number.")
+                
+        while True:
+            try:
+                num_2 = int(input("Enter your second number: "))
+                break
+            except ValueError:
+                print("Please enter a valid number.")
+                
+        ans = num_1 - num_2
+        print(f"The answer is {ans}.")
+        print("Sending you back to the terminal.")
         commands()
     elif calc_input == "3":
-        print("so i havent coded that yet here's the terminal")
+        while True:
+            try:
+                num_1 = int(input("Enter your first number: "))
+                break
+            except ValueError:
+                print("Please enter a valid number.")
+                
+        while True:
+            try:
+                num_2 = int(input("Enter your second number: "))
+                break
+            except ValueError:
+                print("Please enter a valid number.")
+                
+        ans = num_1 * num_2
+        print(f"The answer is {ans}.")
+        print("Sending you back to the terminal.")
         commands()
     elif calc_input == "4":
-        print("so i havent coded that yet here's the terminal")
+        while True:
+            try:
+                num_1 = int(input("Enter your first number: "))
+                break
+            except ValueError:
+                print("Please enter a valid number.")
+                
+        while True:
+            try:
+                num_2 = int(input("Enter your second number: "))
+                break
+            except ValueError:
+                print("Please enter a valid number.")
+                
+        ans = num_1 / num_2
+        print(f"The answer is {ans}.")
+        print("Sending you back to the terminal.")
         commands()
     else:
         print("Command not found.")
         time.sleep(.4)
         print("Calculator exited.")
+        commands()
+
+def exit_term():
+    user_input = input("Are you sure? (Y/N) ").upper()
+    if user_input == "Y":
+        # clears the system
+        os.system('cls||clear')
+        os._exit(0)
+    elif user_input == "N":
+        commands()
+    else:
+        print("Command not found.")
         commands()
 
 # all the commands
@@ -90,16 +151,7 @@ def commands():
         # does this matter?
         return commands()
     elif user_input == "exit":
-        user_input = input("Are you sure? (Y/N) ").upper()
-        if user_input == "Y":
-            # clears the system
-            os.system('cls||clear')
-            os._exit(0)
-        elif user_input == "N":
-            commands()
-        else:
-            print("Command not found.")
-            commands()
+        exit_term()
     elif user_input == "help":
         # more like help me, am i right?
         print(f"This is the {boldstart}help{boldend} command.")
