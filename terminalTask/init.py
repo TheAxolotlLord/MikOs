@@ -40,6 +40,7 @@ def main():
     print("Enter a command to continue.")
     commands()
 
+# calculator (pain)
 def calc():
     print("Welcom to the Calc App!")
     print("Select an operation:")
@@ -47,7 +48,7 @@ def calc():
     print("2. Subtraction")
     print("3. Multiplcation")
     print("4. Division")
-    calc_input = input("")
+    calc_input = input("> ")
     if calc_input == "1":
         while True:
             try:
@@ -130,6 +131,7 @@ def calc():
         print("Calculator exited.")
         commands()
 
+# exit command
 def exit_term():
     user_input = input("Are you sure? (Y/N) ").upper()
     if user_input == "Y":
@@ -161,14 +163,14 @@ def commands():
         print("dir: Shows the files in the directory.")
         print("open: Opens a file or folder. To open a file not in the current folder, use a forward slash. (eg: Folder/file.txt)")
         print("logout: Log the user out.")
-        print("calc: Opens the Calc App.")
         commands()
     elif user_input == "dir":
         print("Directory:")
+        print(" "*4 + "calc.app")
         print(" "*4 + "mail.app")
         print(" "*4 + "terminal.app")
         print(" "*4 + "writer.app")
-        print(" "*4 + "userdata.txt")
+        print(" "*4 + "userdata.py")
         print(" "*4 + "ReceivedMail")
         print(" "*4 + "SentMail")
         commands()
@@ -181,7 +183,7 @@ def commands():
     elif user_input == "open writer.app":
         print("Sorry, but you can't do that right now.")
         commands()
-    elif user_input == "open userdata.txt":
+    elif user_input == "open userdata.py":
         print(f"You must have the role {italicstart}SYS_OP{italicend} to do that.")
         commands()
     elif user_input == "open SentMail":
@@ -223,7 +225,7 @@ def commands():
     elif user_input == "logout":
         os.system('cls||clear')
         login()
-    elif user_input == "calc":
+    elif user_input == "open calc.app":
         calc()
     else:
         print("Command not found.")
