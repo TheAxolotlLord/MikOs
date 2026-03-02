@@ -7,8 +7,9 @@ boldstart = '\033[1m'
 boldend = '\033[0m'
 italicstart = '\x1B[3m'
 italicend = '\x1B[23m'
+
 # mail contents
-mail_1 = {"sender": "teto", "receiver": "rin", "message": f"RUN BEFORE {italicstart}SHE{italicend} CATCHES YOU"}
+inbox_teto1 = {"sender": "teto", "receiver": "rin", "message": f"RUN BEFORE {italicstart}SHE{italicend} CATCHES YOU"}
 
 # login function
 def login():
@@ -21,10 +22,24 @@ def login():
         if user["user"] == username:
             password = input("Password: ").lower()
             if user["pass"] == password:
+                if user["user"] == "john_doe":
+                    twofa = input("Enter 2FA: ").lower()
+                    if twofa == str(32 * user["UID"] * 100):
+                        logged_user = user["user"]
+                        logged_pass = user["pass"]
+                        uid = user["UID"]
+                        os.system('cls||clear')
+                        main()    
+                        return
+                    else:
+                        os.system('cls||clear')
+                        print("HAHA! You can't just try to hack an Admin account like that! Or write down your backup codes. Please, bro.")
+                        return login()
                 logged_user = user["user"]
                 logged_pass = user["pass"]
+                uid = user["UID"]
                 os.system('cls||clear')
-                main()
+                main()    
                 return
             else:
                 os.system('cls||clear')
@@ -215,9 +230,9 @@ def commands():
     elif user_input == "open ReceivedMail/untitled1.mail":
         if logged_user == "rin":
             print("Mail Contents:")
-            print("From: " + mail_1["sender"])
-            print("To: " + mail_1["receiver"])
-            print("Subject: " + mail_1["message"])
+            print("From: " + inbox_teto1["sender"])
+            print("To: " + inbox_teto1["receiver"])
+            print("Subject: " + inbox_teto1["message"])
             commands()
         else:
             print("Command not found.")
