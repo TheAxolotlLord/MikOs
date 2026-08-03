@@ -1,0 +1,17 @@
+import random
+
+keys = ["C/Am","G/Em", "D/Bm", "A/f#m", "E/C#m", "B/G#m", "F#/D#m", "C#m/A#m", "Cb/Abm", "Gb/Ebm", "Db/Bbm", "Ab/Fm", "Eb/Cm", "Bb/Gm", "F/Dm"]
+time_sigs = ["2/4", "3/4", "4/4", "5/4", "6/4", "3/8", "4/8", "5/8", "6/8", "7/8", "9/8", "12/8", "C", "-C-", "2/2", "3/2"]
+tempo_min = 50
+tempo_max = 200
+
+def music_random(): 
+    if random.randint(1,2) == 1:
+        print("major")
+    else:
+        print("minor")
+    print(keys[random.randint(0,14)])
+    print(time_sigs[random.randint(0,15)])
+    print("tempo:", random.randint(tempo_min,tempo_max))
+
+music_random()
