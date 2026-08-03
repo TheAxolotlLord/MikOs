@@ -1,6 +1,11 @@
 from userdata import *
 import time
 import os
+import sys # it won't stop spitting errors unless i import sys (for some odd reason)
+
+# file extensions reading
+file_extensions_availiable = (".mkap",".txt","",".py",)
+translated_extension = ("MikOS Application", "Read-Only Text File", "Folder", "System File")
 
 # bold and italic varibles
 boldstart = '\033[1m'
@@ -55,97 +60,6 @@ def main():
     print("Enter a command to continue.")
     commands()
 
-# calculator (pain)
-def calc():
-    print("Welcom to the Calc App!")
-    print("Select an operation:")
-    print("1. Addition")
-    print("2. Subtraction")
-    print("3. Multiplcation")
-    print("4. Division")
-    calc_input = input("> ")
-    if calc_input == "1":
-        while True:
-            try:
-                num_1 = int(input("Enter your first number: "))
-                break
-            except ValueError:
-                print("Please enter a valid number.")
-                
-        while True:
-            try:
-                num_2 = int(input("Enter your second number: "))
-                break
-            except ValueError:
-                print("Please enter a valid number.")
-                
-        ans = num_1 + num_2
-        print(f"The answer is {ans}.")
-        print("Sending you back to the terminal.")
-        commands()
-    elif calc_input == "2":
-        while True:
-            try:
-                num_1 = int(input("Enter your first number: "))
-                break
-            except ValueError:
-                print("Please enter a valid number.")
-                
-        while True:
-            try:
-                num_2 = int(input("Enter your second number: "))
-                break
-            except ValueError:
-                print("Please enter a valid number.")
-                
-        ans = num_1 - num_2
-        print(f"The answer is {ans}.")
-        print("Sending you back to the terminal.")
-        commands()
-    elif calc_input == "3":
-        while True:
-            try:
-                num_1 = int(input("Enter your first number: "))
-                break
-            except ValueError:
-                print("Please enter a valid number.")
-                
-        while True:
-            try:
-                num_2 = int(input("Enter your second number: "))
-                break
-            except ValueError:
-                print("Please enter a valid number.")
-                
-        ans = num_1 * num_2
-        print(f"The answer is {ans}.")
-        print("Sending you back to the terminal.")
-        commands()
-    elif calc_input == "4":
-        while True:
-            try:
-                num_1 = int(input("Enter your first number: "))
-                break
-            except ValueError:
-                print("Please enter a valid number.")
-                
-        while True:
-            try:
-                num_2 = int(input("Enter your second number: "))
-                break
-            except ValueError:
-                print("Please enter a valid number.")
-                
-        ans = num_1 / num_2
-        print(f"The answer is {ans}.")
-        print("Sending you back to the terminal.")
-        commands()
-    else:
-        print("Command not found.")
-        time.sleep(.4)
-        print("Calculator exited.")
-        commands()
-
 # exit command
 def exit_term():
     user_input = input("Are you sure? (Y/N) ").upper()
@@ -158,6 +72,23 @@ def exit_term():
     else:
         print("Command not found.")
         commands()
+
+# open app
+def open_app(filename):
+    # sets the filepath to the app that will be run
+    path = os.path.join("cations", filename)
+
+    # check if valid
+    if not os.path.exists(path):
+        print("App could not run. ERR: APP_NOT_FOUND")
+        return
+    # open with "r" as read
+    with open(path, "r") as file:
+        code = file.read()
+
+    ### run it (i don't know what the namespaces are yet)
+    namespace = {"__name__": "__main__"}
+    exec(code, namespace)
 
 # all the commands
 def commands():
@@ -181,67 +112,75 @@ def commands():
         commands()
     elif user_input == "dir":
         print("Directory:")
-        print(" "*4 + "calc.app")
-        print(" "*4 + "mail.app")
-        print(" "*4 + "terminal.app")
-        print(" "*4 + "writer.app")
-        print(" "*4 + "userdata.py")
-        print(" "*4 + "ReceivedMail")
-        print(" "*4 + "SentMail")
+        for app_name in os.scandir("cations"):
+            # make sure it's not the pycache
+            if str(app_name) != "<DirEntry '__pycache__'>":
+                # print the name, and get rid of the weird default directory garbage output stuff
+                split_app = str(app_name)[11:(len(str(app_name)) - 2)]
+                extension = os.path.splitext(split_app)[1]
+                dedicated_ext = "File"
+                for ext in file_extensions_availiable:
+                    i = 0
+                    if ext == extension:
+                        dedicated_ext = translated_extension[i]
+                        i += 1
+
+                print(" "*4 + "'" + split_app + "' - " + dedicated_ext)  
         commands()
-    elif user_input == "open mail.app":
-        print("Sorry, but you can't do that right now.")
-        commands()
-    elif user_input == "open terminal.app":
-        print("This application is already open.")
-        commands()
-    elif user_input == "open writer.app":
-        print("Sorry, but you can't do that right now.")
-        commands()
-    elif user_input == "open userdata.py":
-        print(f"You must have the role {italicstart}SYS_OP{italicend} to do that.")
-        commands()
-    elif user_input == "open SentMail":
+    # elif user_input == "open mail.mkap":
+    #     print("Sorry, but you can't do that right now.")
+    #     commands()
+    # elif user_input == "open terminal.mkap":
+    #     print("This application is already open.")
+    #     commands()
+    # elif user_input == "open writer.mkap":
+    #     print("Sorry, but you can't do that right now.")
+    #     commands()
+    # elif user_input == "open userdata.py":
+    #     print(f"You must have the role {italicstart}SYS_OP{italicend} to do that.")
+    #     commands()
+    # elif user_input == "open SentMail":
         # make function called openFolder(input)
-        if logged_user == "teto":
-            print("There is 1 item(s) in this folder:")
-            print("untitled1.mail")
-            commands()
-        else:
-            print("There is 1 item(s) in this folder:")
-            print("[HIDDEN_ITEM]")
-            commands()
-    elif user_input == "open ReceivedMail":
-        if logged_user == "rin":
-            print("There is 1 item(s) in this folder:")
-            print("untitled1.mail")
-            commands()
-        else:
-            print("There is 1 item(s) in this folder:")
-            print("[HIDDEN_ITEM]")
-            commands()
-    elif user_input == "open SentMail/untitled1.mail":
-        if logged_user == "teto":
-            print("You already sent that mail.")
-            commands()
-        else:
-            print("Command not found.")
-            commands()
-    elif user_input == "open ReceivedMail/untitled1.mail":
-        if logged_user == "rin":
-            print("Mail Contents:")
-            print("From: " + inbox_teto1["sender"])
-            print("To: " + inbox_teto1["receiver"])
-            print("Subject: " + inbox_teto1["message"])
-            commands()
-        else:
-            print("Command not found.")
-            commands()
+    #     if logged_user == "teto":
+    #         print("There is 1 item(s) in this folder:")
+    #         print("untitled1.mail")
+    #         commands()
+    #     else:
+    #         print("There is 1 item(s) in this folder:")
+    #         print("[HIDDEN_ITEM]")
+    #         commands()
+    # elif user_input == "open ReceivedMail":
+    #     if logged_user == "rin":
+    #         print("There is 1 item(s) in this folder:")
+    #         print("untitled1.mail")
+    #         commands()
+    #     else:
+    #         print("There is 1 item(s) in this folder:")
+    #         print("[HIDDEN_ITEM]")
+    #         commands()
+    # elif user_input == "open SentMail/untitled1.mail":
+    #     if logged_user == "teto":
+    #         print("You already sent that mail.")
+    #         commands()
+    #     else:
+    #         print("Command not found.")
+    #         commands()
+    # elif user_input == "open ReceivedMail/untitled1.mail":
+    #     if logged_user == "rin":
+    #         print("Mail Contents:")
+    #         print("From: " + inbox_teto1["sender"])
+    #         print("To: " + inbox_teto1["receiver"])
+    #         print("Subject: " + inbox_teto1["message"])
+    #         commands()
+    #     else:
+    #         print("Command not found.")
+    #         commands()
     elif user_input == "logout":
         os.system('cls||clear')
         login()
-    elif user_input == "open calc.app":
-        calc()
+    if user_input.startswith("open ") and user_input != "open ":
+        open_app(user_input.split()[1])
+        commands()
     else:
         print("Command not found.")
         commands()
