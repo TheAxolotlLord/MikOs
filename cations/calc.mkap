@@ -1,0 +1,95 @@
+import time
+
+# calculator (pain)
+def calc():
+    print("Welcom to the Calc App!")
+    print("Select an operation:")
+    print("1. Addition")
+    print("2. Subtraction")
+    print("3. Multiplcation")
+    print("4. Division")
+    calc_input = input("> ")
+    if calc_input == "1":
+        while True:
+            try:
+                num_1 = int(input("Enter your first number: "))
+                break
+            except ValueError:
+                print("Please enter a valid number.")
+                
+        while True:
+            try:
+                num_2 = int(input("Enter your second number: "))
+                break
+            except ValueError:
+                print("Please enter a valid number.")
+                
+        ans = num_1 + num_2
+        print(f"The answer is {ans}.")
+        print("Sending you back to the terminal.")
+        return
+    elif calc_input == "2":
+        while True:
+            try:
+                num_1 = int(input("Enter your first number: "))
+                break
+            except ValueError:
+                print("Please enter a valid number.")
+                
+        while True:
+            try:
+                num_2 = int(input("Enter your second number: "))
+                break
+            except ValueError:
+                print("Please enter a valid number.")
+                
+        ans = num_1 - num_2
+        print(f"The answer is {ans}.")
+        print("Sending you back to the terminal.")
+        return
+    elif calc_input == "3":
+        while True:
+            try:
+                num_1 = int(input("Enter your first number: "))
+                break
+            except ValueError:
+                print("Please enter a valid number.")
+                
+        while True:
+            try:
+                num_2 = int(input("Enter your second number: "))
+                break
+            except ValueError:
+                print("Please enter a valid number.")
+                
+        ans = num_1 * num_2
+        print(f"The answer is {ans}.")
+        print("Sending you back to the terminal.")
+        return
+    elif calc_input == "4":
+        while True:
+            try:
+                num_1 = int(input("Enter your first number: "))
+                break
+            except ValueError:
+                print("Please enter a valid number.")
+                
+        while True:
+            try:
+                num_2 = int(input("Enter your second number: "))
+                break
+            except ValueError:
+                print("Please enter a valid number.")
+                
+        ans = num_1 / num_2
+        print(f"The answer is {ans}.")
+        print("Sending you back to the terminal.")
+        return
+    else:
+        print("Command not found.")
+        time.sleep(.4)
+        print("Calculator exited.")
+        return
+
+# app must run itself afterward
+calc()
