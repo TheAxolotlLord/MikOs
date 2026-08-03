@@ -9,4 +9,12 @@ I'm adding lore to this OS, and it's fun to work on!
 If you want to just see some of it, you can use the username "guest". There is no password for that account.
 To find out other Users and Passes, either peek in the code (which is no fun) or guess!
 
-Oh boy, a brand new admin account has been added! (2FA is their UID * 3200)
+Admin account has been added! (2FA is their UID * 3200)
+
+## What are "*.mkap*" files?
+
+MkAp is the file format used for MikOS Applications. They are written in Python. The only rule to making your own is:
+
+- If you want to return to the terminal/leave the app, use a __return__.
+- Make sure everything is in a function.
+- Run said function at the end of the script so something actually happens.
