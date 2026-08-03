@@ -178,7 +178,7 @@ def commands():
     elif user_input == "logout":
         os.system('cls||clear')
         login()
-    if user_input.startswith("open ") and user_input != "open ":
+    elif user_input.startswith("open ") and user_input != "open ":
         open_app(user_input.split()[1])
         commands()
     else:
